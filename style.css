@@ -33,12 +33,15 @@
   background: #F7F7F7;
   border: 1px solid #CCC;
   padding: 8px;
-  width: 384px;
+  width: 500px;
 }
 
 #vk_notes_input {
   margin: 0px 0px 8px;
-  width: 376px;
+  width: 492px;
+  min-width: 492px;
+  max-width: 492px;
+  height: 100px;
   padding: 4px 3px;
 }
 
@@ -48,6 +51,8 @@ button#vk_notes_save {
 
 #vk_notes_visible {
   margin: 5px 8px 0px;
+  width: 200px;
+  line-height: 1.1em;
 }
 
 #vk_notes_profile {

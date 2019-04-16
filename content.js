@@ -11,9 +11,9 @@ function geByClass1(c, n) {
 
 
 function update() {
-  var info = ge('profile_info');
+  var info = ge('page_info_wrap');
   var short = ge('profile_short');
-  var bottom_actions = ge('profile_bottom_actions');
+  var bottom_actions = geByClass1('page_actions_cont');
 
   if (info && short && bottom_actions && !ge('vk_notes_profile')) {
     var link = document.createElement('a');
@@ -36,7 +36,7 @@ function update() {
     text.id = 'vk_notes_note';
     text.style.display = 'none';
     text.style.borderBottom = '1px solid #E8EBEE';
-    text.style.paddingTop = '4px';
+    text.style.padding = '10px 0';
     text.className = 'profile_info';
     info.insertBefore(text, short);
 
@@ -66,7 +66,7 @@ function update() {
   <tbody><tr>\
     <td class="sidesh" rowspan="2"><div></div></td>\
     <td><div class="editor">\
-      <input class="text" maxlength="140" id="vk_notes_input" value="' + (note ? note.text : '') + '">\
+      <textarea class="text" maxlength="140" id="vk_notes_input">' + (note ? note.text : '') + '</textarea>\
       <a id="vk_notes_delete" class="fl_r" style="margin: 4px;" vk_notes_tooltip="true">удалить</a>\
       <div class="fl_l button_blue"><button id="vk_notes_save">Сохранить</button></div>\
       <div class="fl_l checkbox' + (note && !note.visible ? '' : ' on') + '" id="vk_notes_visible" onclick="checkbox(this);"><div></div>Отображать по умолчанию</div>\
@@ -84,7 +84,7 @@ function update() {
         text.style.display = 'block';
 
         note = { text: ge('vk_notes_input').value, visible: ge('vk_notes_visible').classList.contains('on') };
-        ge('vk_notes_text').innerHTML = note.text;
+        ge('vk_notes_text').innerHTML = note.text.replace(/\n/g, '<br/>');
 
         chrome.extension.sendRequest({ method: 'saveNote', user_id: user_id, note: note });
       }
@@ -104,7 +104,7 @@ function update() {
       text.innerHTML =
 '<div class="clear_fix miniblock">\
   <div class="label fl_l">Ваша заметка:</div>\
-  <div class="labeled fl_l" id="vk_notes_text">' + (note ? note.text : '') + '</div>\
+  <div class="labeled fl_l" id="vk_notes_text">' + (note ? note.text.replace(/\n/g, '<br/>') : '') + '</div>\
 </div>';
     });
   }

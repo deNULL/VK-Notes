@@ -151,6 +151,7 @@
                           //black: 1,
                           shift: [54, 8, 8],
                           hidedt: 500,
+                          dir: 'auto',
                           slide: 15
                         });
                         //linksPaused = false;
@@ -213,6 +214,7 @@
                         //black: 1,
                         shift: [54, 8, 8],
                         hidedt: 500,
+                        dir: 'auto',
                         slide: 15
                       });
                       //linksPaused = false;
