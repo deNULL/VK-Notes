@@ -1,7 +1,7 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
   if (request.method == 'updateOptions') {
     saveOptions(request.update, true);
-    rebuildMenu();
+    /*rebuildMenu();*/
   } else
   if (request.method == 'getOptions') {
     sendResponse(opts);
