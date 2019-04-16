@@ -122,7 +122,7 @@
       ((window.vkNotesOptions.showUserStatus && user.status)? '<div class="mention_tt_row">' + user.status + '</div>' : '') +
       '<div style="height: 7px"></div>' +
       ((window.vkNotesOptions.showUserNote && note && note.visible)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">Заметка:</span> ' + note.text + '</div>' : '') +
-      ((window.vkNotesOptions.showUserCity && user.city && user.country)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">Страна:</span> <a href="/search?c[name]=0&c[section]=people&c[country]=' + user.country.id + '&c[city]=' + user.city.id + '" title="' + user.city.title + ', ' + user.country.title + '">' + user.city.title + '</a></div>' : '') +
+      ((window.vkNotesOptions.showUserCity && user.city && user.country)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">Город:</span> <a href="/search?c[name]=0&c[section]=people&c[country]=' + user.country.id + '&c[city]=' + user.city.id + '" title="' + user.city.title + ', ' + user.country.title + '">' + user.city.title + '</a></div>' : '') +
       ((window.vkNotesOptions.showUserUniversity && user.university_name)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">ВУЗ:</span> <a href="/search?c[name]=0&c[section]=people&c[university]=' + user.university + '">' + user.university_name + '</a></div>' : '') +
       ((window.vkNotesOptions.showUserSite && user.site)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">Сайт:</span> <a href="' + fixUrl(user.site) + '" target="_blank">' + user.site + '</a></div>' : '') +
       ((window.vkNotesOptions.showUserPhone && user.mobile_phone)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 58px">Телефон:</span> <a href="tel:' + user.mobile_phone + '">' + user.mobile_phone + '</a></div>' : '') +
@@ -147,31 +147,10 @@
   <span class="mention_tt_sub_label">Подписаться</span>
 </button><button class="flat_button button_small mention_tt_write" onclick="return showWriteMessageBox(event, ${user.id});">
   Написать сообщение
-</button></div--></div>`/*
-                            '<table class="mention_tt_t" style="width: 330px" cellpadding="0" cellspacing="0">' +
-                              '<tbody><tr>' +
-                              '<td class="mention_tt_photo"><a href="/' + match[1] + '" class="mention_tt_photo" vk_notes_tooltip="true"><img src="' + user.photo_100 + '" width="100"></a></td>' +
-                            '<td>' +
-                              '<div class="mention_tt_right" style="width: 216px">' +
-                                '<h4 class="mention_tt_title" style="color: white; font-weight: normal"><a href="/' + match[1] + '" style="font-weight: bold" vk_notes_tooltip="true">' + user.first_name + ' ' + user.last_name + '</a>' + () + '</h4>' +
-                                ((window.vkNotesOptions.showUserStatus && user.status)? '<div class="mention_tt_info">' + user.status + '</div>' : '') +
-                                '<div style="height: 7px"></div>' +
-                                ((window.vkNotesOptions.showUserNote && note && note.visible)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Çàìåòêà:</span> ' + note.text + '</div>' : '') +
-                                ((window.vkNotesOptions.showUserCity && user.city && user.country)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Ãîðîä:</span> <a href="/search?c[name]=0&c[section]=people&c[country]=' + user.country.id + '&c[city]=' + user.city.id + '" title="' + user.city.title + ', ' + user.country.title + '">' + user.city.title + '</a></div>' : '') +
-                                ((window.vkNotesOptions.showUserUniversity && user.university_name)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">ÂÓÇ:</span> <a href="/search?c[name]=0&c[section]=people&c[university]=' + user.university + '">' + user.university_name + '</a></div>' : '') +
-                                ((window.vkNotesOptions.showUserSite && user.site)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Ñàéò:</span> <a href="' + fixUrl(user.site) + '" target="_blank">' + user.site + '</a></div>' : '') +
-                                ((window.vkNotesOptions.showUserPhone && user.mobile_phone)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Òåëåôîí:</span> <a href="tel:' + user.mobile_phone + '">' + user.mobile_phone + '</a></div>' : '') +
-                                '<div class="mention_tt_people_wrap">' +
-                                ((window.vkNotesOptions.showUserMutual && mutual)? 
-                                '<div class="mention_tt_people_title"><a href="friends?id=' + user.id + '&section=common" vk_notes_tooltip="true">' + (mutual.length || 'íåò') + ' ' + num(mutual.length, ['îáùèé äðóã', 'îáùèõ äðóãà', 'îáùèõ äðóçåé']) + '</a></div>' +
-                                '<div style="margin-top: 5px">' + mutualArr.join('') + '</div>'
-                                : '') +
-                                '</div>' +
-                              '</div>' +        
-                            '</td></tr></tbody></table>'*/, 
+</button></div--></div>`, 
                           //black: 1,
                           shift: [54, 8, 8],
-                          hidedt: 50000,
+                          hidedt: 500,
                           slide: 15
                         });
                         //linksPaused = false;
@@ -184,40 +163,53 @@
                       if (members) {
                         for (var i = 0; i < Math.min(members.items.length, 12); i++) {
                           membersArr.push(
-                            //'<td class="mention_tt_person">' +
-                              '<a class="mention_tt_person" style="display: inline-block; margin-bottom: 3px" href="/id' + members.items[i].id + '"' + /*' onmouseover="showTooltip(this, {text: &quot;' + members[i].first_name + ' ' + members[i].last_name + '&quot;, black: 1, shift: [3, 0, 0], showsp: 0});" vk_notes_tooltip="true"'*/'>' +
-                              '<img src="' + members.items[i].photo_50 + '" width="32" height="32"></a>'// +
-                            //'</td>'
+                            `<a class="mention_tt_person" style="margin: 2px" href="/${members.items[i].id}" title="${members.items[i].first_name} ${members.items[i].last_name}">
+                              <img class="mention_tt_person_img" src="${members.items[i].photo_50}">
+                            </a>`
                           );
                         }
                       }
 
                       showTooltip(link, {
-                        className: 'mention_tt',
+                        className: 'tt_default mention_tt',
                         content:
-                          '<table class="mention_tt_t" style="width: 330px" cellpadding="0" cellspacing="0">' +
-                            '<tbody><tr>' +
-                            '<td class="mention_tt_photo"><a href="/' + match[1] + '" class="mention_tt_photo" vk_notes_tooltip="true"><img src="' + group.photo_100 + '" width="100"></a></td>' +
-                          '<td>' +
-                            '<div class="mention_tt_right" style="width: 216px">' +
-                              '<h4 class="mention_tt_title" style="color: white; font-weight: normal"><a href="/' + match[1] + '" style="font-weight: bold" vk_notes_tooltip="true">' + group.name + '</a></h4>' +
-                              ((window.vkNotesOptions.showGroupActivity && group.activity)? '<div class="mention_tt_info">' + group.activity + '</div>' : '') +
-                              ((window.vkNotesOptions.showGroupStatus && group.status)? '<div class="mention_tt_info">' + group.status + '</div>' : '') +
-                              '<div style="height: 7px"></div>' +
-                              ((window.vkNotesOptions.showGroupDescription && group.description)? '<div class="mention_tt_info" style="overflow: hidden; max-height: 70px">' + group.description + '</div>' : '') +
-                              ((window.vkNotesOptions.showGroupCity && group.city && group.country)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Ãîðîä:</span> <a href="/search?c[name]=0&c[section]=communities&c[country]=' + group.country.id + '&c[city]=' + group.city.id + '" title="' + group.city.title + ', ' + group.country.title + '">' + group.city.title + '</a></div>' : '') +
-                              ((window.vkNotesOptions.showGroupSite && group.site)? '<div class="mention_tt_info"><span style="color: white; display: inline-block; width: 56px">Ñàéò:</span> <a href="' + fixUrl(group.site) + '" target="_blank">' + group.site + '</a></div>' : '') +
-                              '<div class="mention_tt_people_wrap">' +
-                              ((window.vkNotesOptions.showGroupMembers && members && members.count)? 
-                              '<div class="mention_tt_people_title"><a href="/search?c%5Bgroup%5D=' + group.id + '&c%5Bsection%5D=people" vk_notes_tooltip="true">' + (members.count || 'íåò') + ' ' + num(members.count, ['ó÷àñòíèê', 'ó÷àñòíèêà', 'ó÷àñòíèêîâ']) + '</a></div>' +
-                              /*'<table class="mention_tt_people" cellspacing="0" cellpadding="0"><tbody><tr>' +
-                                mutualArr.join('') +
-                              '</tr></tbody></table>'*/
-                              '<div style="margin-top: 5px">' + membersArr.join('') + '</div>'
-                              : '') +
-                              '</div>' +
-                            '</div>' +        
-                          '</td></tr></tbody></table>', 
+`<div class="wrapped"><div class="mention_tt_wrap clear_fix">
+  <a vk_notes_tooltip href="/${match[1]}" class="mention_tt_photo">
+    <img class="mention_tt_img" src="${group.photo_100}">
+  </a>
+  <div class="mention_tt_data">
+    <div class="mention_tt_title">
+      <a class="mention_tt_name" vk_notes_tooltip href="/${match[1]}">${group.name}</a>
+    </div>` +
+    ((window.vkNotesOptions.showGroupActivity && group.activity)? '<div class="mention_tt_row mention_tt_online">' + group.activity + '</div>' : '') +
+    `<div class="mention_tt_info">` +
+        ((window.vkNotesOptions.showGroupStatus && group.status)? '<div class="mention_tt_row">' + group.status + '</div>' : '') +
+        '<div style="height: 7px"></div>' +
+        ((window.vkNotesOptions.showGroupDescription && group.description)? '<div class="mention_tt_row" style="overflow: hidden; max-height: 70px">' + group.description + '</div>' : '') +
+        ((window.vkNotesOptions.showGroupCity && group.city && group.country)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 56px">Город:</span> <a href="/search?c[name]=0&c[section]=communities&c[country]=' + group.country.id + '&c[city]=' + group.city.id + '" title="' + group.city.title + ', ' + group.country.title + '">' + group.city.title + '</a></div>' : '') +
+        ((window.vkNotesOptions.showGroupSite && group.site)? '<div class="mention_tt_row"><span style="color: #000; display: inline-block; width: 56px">Сайт:</span> <a href="' + fixUrl(group.site) + '" target="_blank">' + group.site + '</a></div>' : '') +
+        ((window.vkNotesOptions.showGroupMembers && members && members.count)?
+        `<div class="mention_tt_people_wrap">
+        <div class="mention_tt_row mention_tt_extra">
+          <a href="/search?c%5Bgroup%5D=' + group.id + '&c%5Bsection%5D=people" vk_notes_tooltip>
+            ${(members.count || 'нет') + ' ' + num(members.count, ['участник', 'участника', 'участников'])}
+          </a>
+        </div>
+        <div class="mention_tt_people clear_fix" style="margin: 4px -2px 0">
+          ${membersArr.join('')}
+        </div>
+      </div>` : '') +
+    `</div>
+  </div>
+</div>
+<!--div class="mention_tt_actions">
+  <button class="flat_button button_small mention_tt_subscr secondary" onclick="return mentionSubscribe(this, ${group.id}, '');">
+  <span class="mention_tt_subscr_icon"></span>
+  <span class="mention_tt_unsub_label">Вы подписаны</span>
+  <span class="mention_tt_sub_label">Подписаться</span>
+</button><button class="flat_button button_small mention_tt_write" onclick="return showWriteMessageBox(event, ${group.id});">
+  Написать сообщение
+</button></div--></div>`, 
                         //black: 1,
                         shift: [54, 8, 8],
                         hidedt: 500,
